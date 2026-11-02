@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algebra Linear</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased">
+    <side-navbar></side-navbar>
+
+    <main class="lg:pl-64">
+
+        <div class="mx-auto max-w-4xl px-5 pb-16 pt-20 lg:px-10 lg:pt-10">
+            <header>
+                <h1 class="text-2xl font-semibold text-slate-900">Operasi dasar matriks</h1>
+                <p class="mt-1 text-sm text-slate-500">Atur jumlah dan ordo matriks, lalu isi setiap elemennya.</p>
+            </header>
+
+            <div class="mt-8 space-y-5">
+                <div class="grid gap-5 md:grid-cols-2">
+
+                    <!-- Langkah 1: jumlah matriks -->
+                    <section class="card matrix">
+                        <div class="flex items-center gap-3">
+                            <span class="step">1</span>
+                            <label for="matrix" class="font-medium text-slate-900">Berapa matriks yang ingin dihitung?</label>
+                        </div>
+                        <input type="number" id="matrix" min="1" max="26" class="field mt-4">
+                        <button type="button" id="submit_matrix" class="btn mt-4">Atur jumlah</button>
+                    </section>
+
+                    <!-- Langkah 2: ordo matriks -->
+                    <section class="card ordo">
+                        <form id="ordoForm">
+                            <div class="flex items-center gap-3">
+                                <span class="step">2</span>
+                                <h2 class="font-medium text-slate-900">Masukkan ordo matriks ke-<span class="font-serif text-lg italic text-primary-700" id="matrixName"></span></h2>
+                            </div>
+                            <div class="mt-4 flex items-center gap-3">
+                                <input type="number" name="row" id="row" placeholder="Baris" aria-label="Baris" min="1" class="field">
+                                <span class="text-slate-400" aria-hidden="true">×</span>
+                                <input type="number" name="collum" id="collum" placeholder="Kolom" aria-label="Kolom" min="1" class="field">
+                            </div>
+                            <div class="mt-4 flex gap-2">
+                                <button type="button" id="previousOrdo" class="btn w-10 px-0" aria-label="Matriks sebelumnya"><i class="fa-solid fa-caret-left" aria-hidden="true"></i></button>
+                                <button type="button" id="nextOrdo" class="btn w-10 px-0" aria-label="Matriks berikutnya"><i class="fa-solid fa-caret-right" aria-hidden="true"></i></button>
+                                <button type="button" id="submitOrdo" class="btn ml-auto">Simpan ordo</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+                <!-- Daftar ordo (diisi otomatis oleh script.js) -->
+                <section class="card">
+                    <h2 class="font-medium text-slate-900">Ordo setiap matriks</h2>
+                    <div id="ordoList" class="mt-4 flex flex-wrap gap-3"></div>
+                </section>
+
+                <!-- Baris operasi (diisi otomatis oleh script.js) -->
+                <section class="card flex items-end flex-col">
+                    <div class="opration w-full flex items-center justify-center gap-3"></div>
+                    <div class="btn-opration w-full flex items-center justify-end"></div>
+                </section>
+
+                <!-- Detail matriks yang sedang aktif -->
+                <section class="card">
+                    <div class="flex flex-wrap items-center justify-between gap-6">
+                        <div>
+                            <h2 class="text-sm font-medium text-primary-800">Matriks <span id="detailName" class="font-serif italic"></span></h2>
+                            <h3 id="detailOrdo" class="mt-0.5 text-2xl font-semibold tabular-nums text-primary-700">–</h3>
+                            <p id="detailDesc" class="mt-1 text-sm italic text-slate-500">Atur jumlah matriks terlebih dahulu</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 border-t border-slate-100 pt-5">
+                        <div class="mt-4 flex flex-col items-start gap-2">
+                            <span class="collum">
+                                <input type="text" name="" id="" aria-label="Nilai elemen baris 1 kolom 1" class="field w-20 text-center">
+                                <input type="text" name="" id="" aria-label="Nilai elemen baris 1 kolom 2" class="field w-20 text-center">
+                                <input type="text" name="" id="" aria-label="Nilai elemen baris 1 kolom 3" class="field w-20 text-center">
+                            </span>
+                            <span class="collum">
+                                <input type="text" name="" id="" aria-label="Nilai elemen baris 2 kolom 1" class="field w-20 text-center">
+                                <input type="text" name="" id="" aria-label="Nilai elemen baris 2 kolom 2" class="field w-20 text-center">
+                                <input type="text" name="" id="" aria-label="Nilai elemen baris 2 kolom 3" class="field w-20 text-center">
+                            </span>
+                        </div>
+                        <div class="mt-4 w-full flex items-center justify-between gap-2">
+                            <button type="button" class="btn w-40 px-0 flex items-center gap-3" aria-label="Matriks sebelumnya"><i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i> Previous</button>
+                            <button type="button" class="btn w-40 px-0 flex items-center gap-3" aria-label="Matriks berikutnya">Next <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="components/Navbar.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
